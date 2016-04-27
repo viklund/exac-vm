@@ -1,0 +1,26 @@
+## In next version of ansible!!
+#- name: Add MongoDB yum repository
+#  yum_repository:
+#      name: MongoDB Repository
+#      baseurl: http://downloads-distro.mongodb.org/repo/redhat/os/x86_64/
+- name: Add MongoDB yum repository
+  template:
+      src: mongodb.repo
+      dest: /etc/yum.repos.d/mongodb.repo
+      owner: root
+      group: root
+- name: Install MongoDB
+  yum: state=present name={{ item }}
+  with_items:
+      - mongodb-org
+      - mongodb-org-server
+
+# This is probably only true for this specific Vagrant Box configuration
+- name: Set readahead size for MongoDB disk 1
+  shell: blockdev --setra 256 /dev/mapper/MongoVG-MongoLV
+- name: Set readahead size for MongoDB disk 2
+  shell: blockdev --setra 256 /dev/sdb1
+
+- name: Start MongoDB
+  service: name=mongod state=started
+

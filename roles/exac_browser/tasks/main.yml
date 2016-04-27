@@ -1,0 +1,9 @@
+- name: Fetch pip installer
+  get_url:
+      url: https://bootstrap.pypa.io/get-pip.py
+      dest: ./
+      validate_certs: yes
+- name: Run pip installer
+  shell: python get-pip.py
+- name: Install dependencies
+  pip: requirements=/home/vagrant/exac_browser/requirements.txt

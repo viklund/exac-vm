@@ -4,3 +4,6 @@
       - vim
       - git
       - wget
+      - gcc
+      - python-devel
+      - zlib-devel
