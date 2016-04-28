@@ -23,7 +23,5 @@ sudo pvcreate /dev/sdb1
 sudo vgcreate MongoVG /dev/sdb1
 sudo lvcreate -n MongoLV -l 100%VG MongoVG
 sudo mkfs.ext4 /dev/mapper/MongoVG-MongoLV
-sudo mkdir /var/lib/mongo
-sudo mount /dev/mapper/MongoVG-MongoLV /var/lib/mongo
 
 sudo sh -c 'date > /etc/disk_added_date'
